@@ -1,12 +1,12 @@
-1. HackerOne
-2. Bugcrowd
-3. YesWeHack
-4. intigriti
-5. Synack
-6. Cobalt
-7. Immunefi
-8. Open Bug Bounty
-9. Zerocopter
+01. HackerOne
+02. Bugcrowd
+03. YesWeHack
+04. intigriti
+05. Synack
+06. Cobalt
+07. Immunefi
+08. Open Bug Bounty
+09. Zerocopter
 10. HackenProof
 11. Detectify
 12. Yogosha
