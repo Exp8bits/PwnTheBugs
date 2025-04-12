@@ -1,12 +1,12 @@
 
 # Google Cloud Storage Links
 
-• **Q**: Where can we get the google cloud link?  
-  **A**: We might find cloud links in the source code or javascript files, or if you open an image uploaded to the cloud, the cloud link might appear for you.
+• **Question**: Where can we get the google cloud link?  
+   **Answer**: We might find cloud links in the source code or javascript files, or if you open an image uploaded to the cloud, the cloud link might appear for you.
 
 • The Google Cloud Storage link usually looks like this: `https://storage.googleapis.com/<Bucket_name>/<File_name>`
-  - Bucket link (no specific file): `https://storage.googleapis.com/my_bucket/`
-  - Direct file link: `https://storage.googleapis.com/my_bucket/images/logo.png`
+   - Bucket link (no specific file): `https://storage.googleapis.com/my_bucket/`
+   - Direct file link: `https://storage.googleapis.com/my_bucket/images/logo.png`
 
 • It could also look like this: `https://storage.googleapis.com/username-dev/index.html` or `dev-username`. Here, `username` is the bucket name and is unique for each user, while `dev` represents the environment variable (modifiable), whereas `index.html` is the active file/key being served. The file `index.html` is called the key in this context. You can FUZZ it and discover more things.
 
