@@ -38,7 +38,7 @@
     ```
   - PTR allows a single IP to map to different domains.
 
-## Known Attacks on DNS:
+## Known attacks on DNS:
 - **Subdomain Takeover**: 
   - This occurs when an attacker takes over a subdomain or domain name and gains control over it, potentially redirecting it to another location.
 - **DNS Spoofing**: 
@@ -48,12 +48,12 @@
 - **DNS Amplification Attack**:
   - A type of Distributed Denial of Service (DDoS) attack that exploits DNS servers by sending large responses to small requests, overwhelming the target server.
 
-## How Do Subdomain Takeover Vulnerabilities Arise?
+## How do subdomain takeover vulnerabilities arise?
 - Subdomain takeover vulnerabilities occur when a subdomain is no longer actively managed or is unclaimed. This can happen due to various reasons, such as:
   - **Abandoned Services**: A subdomain may have been used for a service that is no longer active, leaving the subdomain unused.
   - **Misconfigurations**: Errors in managing domains or subdomains can lead to unclaimed subdomains, which are vulnerable to takeover.
 
-## Impact of Subdomain Takeover Vulnerabilities:
+## Impact of subdomain takeover vulnerabilities:
 - A subdomain takeover exposes an organization’s users and assets to several risks, including:
   - **Misrepresentation**: Attackers could create fraudulent websites under the affected subdomain, deceiving users into interacting with what appears to be a legitimate service or content.
   - **Data Theft**: By controlling the subdomain, attackers can intercept sensitive data transmitted between users and the subdomain, leading to data theft or unauthorized access.
