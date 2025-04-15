@@ -1,5 +1,5 @@
 
-# Google Cloud Storage Links
+# Google Cloud storage links
 
 • **Question**: Where can we get the google cloud link?  
       **Answer**: We might find cloud links in the source code or javascript files, or if you open an image uploaded to the cloud, the cloud link might appear for you.
