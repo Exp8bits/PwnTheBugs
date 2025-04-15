@@ -4,7 +4,7 @@ There are two ways to perform a subdomain takeover: manually and automatically u
 
 ## Manually:
 
-### 1. Check the Subdomain:
+### 1. Check the subdomain:
 - Command: `dig <domain>`
 - Command: `dig example.com`
 - Command: `dig sub.example.com`
@@ -18,7 +18,7 @@ There are two ways to perform a subdomain takeover: manually and automatically u
 
 ## Automatically:
 
-### Case (1): Extracting Subdomains and Identifying 404s
+### Case (1): Extracting subdomains and identifying 404s
 1. Use `subfinder` to extract subdomains:
    - Command: `subfinder -d example.com | httpx -sc 404 | tee subs.txt`
    
@@ -47,7 +47,7 @@ Command to run Nuclei:
 4. If Akamai's firewall interferes and causes incorrect results:
    - Command: `subzy run --targets subs.txt --hide_fails --vuln | grep -v -E "Akamai|xyz|available|\-"`
 
-## Verifying Vulnerability:
+## Verifying vulnerability:
 Once you find a vulnerable subdomain, use the `dig` tool to get the CNAME:
 - Command: `dig sub.example.com CNAME`
   
