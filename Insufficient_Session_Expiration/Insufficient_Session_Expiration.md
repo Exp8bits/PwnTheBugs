@@ -1,21 +1,21 @@
 #  Insufficient Session Expiration
 
-##  What is Insufficient Session Expiration?
+##  What is Insufficient session expiration?
 - A session must end once the **password or email is changed** or **2FA is added**.
 - If you're logged into the same account on multiple devices and you change any sensitive information (like password or email), you **should be logged out of all sessions**.
 - If you're **not logged out from other sessions**, this is a vulnerability known as **Insufficient Session Expiration**.
 
 ---
 
-##  How to Find the Vulnerability
+##  How to find the vulnerability
 - Log into the **same account from two browsers**.
 - Change the password on one browser.
 - Check if the other browser is **still logged in**.
 
-###  Secure Behavior:
+###  Secure behavior:
 - All sessions are **logged out automatically**.
 
-###  Vulnerable Behavior:
+###  Vulnerable behavior:
 - Other sessions are **still active** — this means **Improper Session Expiration**.
 
 ---
@@ -27,7 +27,7 @@
 
 ---
 
-##  How Developers Should Fix It
+##  How developers should fix it
 - The backend **must invalidate all active sessions** after sensitive changes.
 - Use:
   - `Session.invalidate()`
@@ -36,7 +36,7 @@
 
 ---
 
-##  Example Vulnerable & Secure Flask Implementation
+##  Example vulnerable & secure flask implementation
 
 ```python
 from flask import Flask, session, redirect, request, url_for
