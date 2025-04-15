@@ -1,5 +1,5 @@
 
-# Cloud Domain Structure
+# Cloud domain structure
 
 The cloud domain looks something like this: `https://example.s3-website-us-west-2.amazonaws.com`
 - **example** → Bucket name.
@@ -7,7 +7,7 @@ The cloud domain looks something like this: `https://example.s3-website-us-west-
 - **us-west-2** → Region.
 - **amazonaws.com** → The hosting cloud.
 
-## Using `dig` Command to Identify CNAME
+## Using `dig` command to identify CNAME
 
 We use the `dig` command first to identify the CNAME of the subdomain so that if it doesn't exist, we can perform a Subdomain Takeover.
 
@@ -17,7 +17,7 @@ dig sub.example.com
 dig CNAME sub.example.com   # To get bucket name from the subdomain.
 ```
 
-### Extracting AWS CNAMEs from a File
+### Extracting AWS CNAMEs from a file
 
 If you have a file containing multiple links and want to extract only those with a CNAME associated with AWS, use the following command:
 
@@ -35,16 +35,16 @@ dig -f [filename] CNAME | grep aws   # Replace [filename] with the actual file n
 nslookup <TargetIP>   # it might show you the CNAME but not the Bucket name, Go to Case (2).
 ```
 
-## Two Possibilities
+## Two possibilities
 
 1. The domain isn't in use.
 2. The domain is in use.
 
-## Case (1): The Domain Isn't in Use
+## Case (1): The domain isn't in use
 
 - If you find that the domain isn't in use, buy it and report the Subdomain Takeover vulnerability.
 
-## Case (2): The Domain is in Use
+## Case (2): The domain is in use
 
 - If you find that the domain is in use, try the following commands to interact with the server:
 
@@ -60,9 +60,9 @@ aws s3 ls s3://<Main_domain> --region <Cloud_domain_region>   # You can use --no
 
 - After executing this command, if multiple files appear and you want to access one of them, append it to the bucket name (e.g., `s3://bucket_name/file`).
 
-## Vulnerability Name: S3-Bucket-Listing
+## Vulnerability name: S3-Bucket-Listing
 
-### Downloading a File from the Server
+### Downloading a file from the server
 
 If you want to download a copy of a file from the server to your device, use:
 
@@ -72,7 +72,7 @@ aws s3 cp s3://Bucket_name/filename /your/path   # From the server to your devic
 
 - Replace `Bucket_name` with the actual bucket name and `filename` with the file you want to download, `/your/path` with the directory where you want to download the file.
 
-### Uploading a File to the Server
+### Uploading a file to the server
 
 If you want to upload a file from your device to the server:
 
@@ -82,7 +82,7 @@ aws s3 cp /your/path/filename s3://Bucket_name/   # From your device to the serv
 
 - Replace `/your/path/filename` with the file you want to upload and `Bucket_name` with the actual bucket name.
 
-### Checking Bucket Permissions
+### Checking bucket permissions
 
 To check the permissions of a specific bucket:
 
@@ -92,7 +92,7 @@ aws s3api get-bucket-acl --bucket <Bucket_name>
 
 This will display the authorized users (Grantees) who have permissions on the S3 bucket and their permission types (e.g., READ, WRITE, FULL_CONTROL).
 
-### Modifying Bucket Permissions
+### Modifying bucket permissions
 
 By default, the file is named `acl.json`, so we will download it to our device and modify `WRITE_ACP` to `FULL_CONTROL` to gain access to the server:
 
@@ -101,11 +101,11 @@ aws s3api get-bucket-acl --bucket <Bucket_name> >> acl.json   # Download from th
 aws s3api put-bucket-acl --bucket <Bucket_name> --access-control-policy file://acl.json   # Upload to the server.
 ```
 
-### See Active Buckets Worldwide
+### See active buckets worldwide
 
 To see all active buckets right now, visit: [Gray Hat Warfare Buckets](https://buckets.grayhatwarfare.com)
 
-## How to Prevent an S3 Bucket from Being Public?
+## How to prevent an S3 Bucket from being public?
 
 To block public access:
 
