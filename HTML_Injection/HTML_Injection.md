@@ -23,7 +23,7 @@
 
 ---
 
-## ▪ How to Know If the Vulnerability Exists?
+## ▪ How to know if the vulnerability exists?
 
 - Start by injecting simple HTML elements:
   - Example: `<h1>test</h1>` or `<u>test</u>`
@@ -31,7 +31,7 @@
 
 ---
 
-## ▪ Exploitation Examples
+## Exploitation examples
 
 - `<img src=x onerror=confirm()>`
 - `<iframe src="http://evil.com"></iframe>`
@@ -41,7 +41,7 @@
 
 ---
 
-## How to Prevent This as a Developer?
+## How to prevent this as a developer?
 
 - **In PHP:** Use `htmlspecialchars()` to encode user input.
 - **In JavaScript:** Use sanitization libraries like `DOMPurify`.
