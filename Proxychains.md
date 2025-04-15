@@ -1,5 +1,5 @@
 
-## ProxyChains: Tool to Route Web Traffic Through Proxies
+## ProxyChains: Tool to route web traffic through proxies
 
 ### What is ProxyChains?
 ProxyChains is a Linux tool that routes all traffic coming from any command-line tool through a proxy server. It's the simplest and easiest method to route web traffic of command-line tools through web proxies.
@@ -9,7 +9,7 @@ ProxyChains is a Linux tool that routes all traffic coming from any command-line
   But when you use ProxyChains, your traffic doesn’t go straight to the website. Instead, it first passes through other computers (called proxies), so the website sees the proxy's IP address, not yours.  
   It's like asking your friend to go to the store for you – the store sees your friend, not you.
 
-#### Why Do We Use ProxyChains?
+#### Why do we use ProxyChains?
 1. **Hide our real IP address**: Useful for maintaining anonymity.
 2. **Bypass firewalls or restrictions**: Helps to access websites if they block you based on IP.
 3. **Test website behavior from different locations or IPs**: Essential for penetration testing and verifying geo-restricted content.
@@ -18,9 +18,9 @@ ProxyChains is a Linux tool that routes all traffic coming from any command-line
 
 ---
 
-### How to Configure ProxyChains
+### How to configure ProxyChains
 
-1. **Edit the Configuration File**:  
+1. **Edit the configuration file**:  
    Open the file `/etc/proxychains.conf` in a text editor.  
    Comment out the last line (if it exists) and add the following lines to configure the proxy servers:
    ```bash
@@ -28,7 +28,7 @@ ProxyChains is a Linux tool that routes all traffic coming from any command-line
    http 127.0.0.1 8080      # Local proxy (Burp)
    ```
 
-2. **Check Proxy Connectivity**:  
+2. **Check proxy connectivity**:  
    To check if the proxies are working, run the following command:
    ```bash
    proxychains curl https://check.torproject.org
@@ -45,15 +45,15 @@ ProxyChains is a Linux tool that routes all traffic coming from any command-line
 
 ---
 
-### Using ProxyChains with Various Hacking Tools
+### Using ProxyChains with various hacking tools
 
-#### 1. **Opening Browser with Fake IP**  
+#### 1. **Opening browser with fake IP**  
    To open Firefox through a proxy:
    ```bash
    proxychains firefox
    ```
 
-#### 2. **Downloading Files through Proxy**
+#### 2. **Downloading files through proxy**
    To download files using `wget` or `curl`:
    - **With wget**:  
      ```bash
@@ -73,21 +73,21 @@ ProxyChains is a Linux tool that routes all traffic coming from any command-line
    - SQLmap will send all traffic through the proxy (fake IP).
    - This is useful if the target website is monitoring IP addresses or has a rate limit.
 
-#### 4. **Using Hydra for Brute-Force Attacks**  
+#### 4. **Using Hydra for Brute-Force attacks**  
    For brute-forcing a login page using Hydra through the proxy:
    ```bash
    proxychains hydra -l admin -P /path/to/passwords.txt 192.168.1.10 http-post-form "/login.php:username=^USER^&password=^PASS^:Invalid credentials"
    proxychains hydra -l admin -P /path/to/passwords.txt example.com http-post-form "/login.php:username=^USER^&password=^PASS^:Invalid credentials"
    ```
 
-#### 5. **Using Nmap with Proxies**  
+#### 5. **Using Nmap with proxies**  
    To use Nmap with a proxy, use the `--proxies` flag:
    ```bash
    nmap --proxies http://127.0.0.1:8080 TargetIP -pPORT -Pn -sC
    ```
    - Make sure to check Burp Suite under Proxy > HTTP History to see the requests.
 
-#### 6. **Using Metasploit with Proxies**  
+#### 6. **Using Metasploit with proxies**  
    To route traffic through a proxy in Metasploit:
    - Set the proxy for a specific exploit:
      ```bash
