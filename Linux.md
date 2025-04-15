@@ -1,10 +1,10 @@
 ## User Account Management
 
-### Display Users on the System
+### Display users on the system
 - **Command**: `users`  
   *This will display the users on the system.*
 
-### Add, Delete, Modify User Accounts
+### Add, Delete, Modify User accounts
 
 - **Add a new user**:  
   - **Command**: `useradd -m -s /bin/bash -G sudo [username]`  
@@ -19,7 +19,7 @@
   - **Command**: `cat /etc/shadow`  
     *Displays the users on the system.*
 
-### Change User Password
+### Change user password
 - **Change password**:  
   - **Command**: `passwd [username]`  
     *To change the password for the specified user.*
@@ -28,12 +28,12 @@
   - **Command**: `passwd -e [username]`  
     *This forces the user to change their password upon first login (must be executed as root).*
 
-### Delete a User
+### Delete a user
 - **Delete user**:  
   - **Command**: `userdel -r [username]`  
     *`-r` = When you delete it, remove the home directory as well.*
 
-### Modify a User
+### Modify a user
 - **Change user home directory**:  
   - **Command**: `usermod -d /change/to/default/path [username]`  
     *Set this path as the default home directory for this user.*
@@ -62,7 +62,7 @@
   - **Command**: `groups [username]`  
     *To view the groups of the specified user.*
 
-### Lock/Unlock a User
+### Lock/Unlock a user
 - **Lock user account**:  
   - **Command**: `passwd -l [username]`  
     *To lock a specific user from logging in.*
