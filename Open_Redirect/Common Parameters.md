@@ -1,0 +1,22 @@
+Common Open redirect query parameters:
+?checkout_url={payload}
+?continue={payload}
+?dest={payload}
+?destination={payload}
+?go={payload}
+?image_url={payload}
+?next={payload}
+?redir={payload}
+?redirect_uri={payload}
+?redirect_url={payload}
+?redirect={payload}
+?return_path={payload}
+?return_to={payload}
+?return={payload}
+?returnTo={payload}
+?rurl={payload}
+?target={payload}
+?url={payload}
+?view={payload}
+/{payload}
+/redirect/{payload}
