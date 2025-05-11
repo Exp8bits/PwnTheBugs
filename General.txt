@@ -1,0 +1,5 @@
+▪ If the request is sent via http and contains sensitive information, such as credentials, this is a vulnerability.
+▪ If you log out and the cookie is still running or reading messages or sensitive data, this is a vulnerability.
+▪ If you found server-status directory with status code 200, this is a vulnerability.
+▪ If you found <meta name="referrer" content="unsafe-url">, this could leak sensitive data so try to report it, go to no-referrer vs unsafe-url node.
+▪ If you're logging in and you find that the response doesn't include a Set-Cookie header, this is a vulnerability.
