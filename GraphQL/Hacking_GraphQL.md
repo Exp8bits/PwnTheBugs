@@ -160,4 +160,4 @@ Injected:
 ```
 
 If the server doesn’t sanitize output, the script will execute in the browser when the data is displayed.
-```
+
