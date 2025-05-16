@@ -35,6 +35,8 @@ wpscan --url https://target.com -e ap
   - View page source then search for meta name, css, javascript (e.g. `<meta name="generator"` or `.css?ver=` or `.js?ver=`)
 > **Note:** If you found outdated core, plugins, or themes, search for the exploit on [WPScan](https://wpscan.com).
 
+---
+
 #### Plugins Enumeration and It's Version
 **Automatically:**
 ```bash
@@ -51,6 +53,8 @@ wpscan --url https://target.com -e vp
   - Change **readme.txt** to **changelog.txt** or **readme.md** 
 > **Note:** If you found outdated core, plugins, or themes, search for the exploit on [WPScan](https://wpscan.com).
 
+---
+
 #### Themes Enumeration and It's Version
 **Automatically:**
 ```bash
@@ -63,6 +67,8 @@ wpscan --url https://target.com -e vt
     - `https://target.com/wp-content/themes/THEMENAME/style.css`
     - `https://target.com/wp-content/themes/THEMENAME/readme.txt`
 > **Note:** If you found outdated core, plugins, or themes, search for the exploit on [WPScan](https://wpscan.com).
+
+---
 
 #### Users Enumeration
 ```bash
