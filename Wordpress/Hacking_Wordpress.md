@@ -134,10 +134,11 @@ wpscan --url https://target.com -e u
 #### Case (1): Brute-Force users IDs
 ```bash
 curl -s -I -X GET http://target.com/?author=1
-# Change author=1 to author=2, 3, etc.
-# If response is 200 or 30X → ID is valid
-# If 400 → ID is invalid
 ```
+- Change author=1 to author=2, 3, etc.
+- If response is 200 or 30X → ID is valid
+- If 400 → ID is invalid
+
 
 #### Case (2): `wp-json` Users directory
 - You can also try to get information about the users by querying:
