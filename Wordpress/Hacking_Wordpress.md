@@ -94,9 +94,9 @@ wpscan --url https://target.com -e u
 
 #### To Get User:
 - Check these URLs:  
-  - https://target.com/?author=1  
-  - https://target.com/wp-json/wp/v2/users  
-  - https://target.com/?rest_route=/wp/v2/users  
+  - `https://target.com/?author=1`
+  - `https://target.com/wp-json/wp/v2/users`
+  - `https://target.com/?rest_route=/wp/v2/users`
 
 #### To Add User:
 - Search for Authorization in JavaScript files and request to `POST /wp-json/wp/v2/users` to add a user.
