@@ -1,4 +1,4 @@
-```markdown
+
 # GraphQL Introspection
 
 - As soon as you reach the GraphQL endpoint, paste this code: Go to GraphQL Introspection Code node.
