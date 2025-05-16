@@ -22,11 +22,10 @@
 
 #### Security Example
 
-Imagine a website with a feature to transfer points or money:
-
-1. You click the “Transfer” button.
-2. The server checks if you have enough balance.
-3. Then it performs the transfer.
+- Imagine a website with a feature to transfer points or money:
+   1. You click the “Transfer” button.
+   2. The server checks if you have enough balance.
+   3. Then it performs the transfer.
 
 ✔ If you click the button twice quickly (or send two requests at the same time), both checks might happen **before the balance is updated** — allowing you to transfer more than you should.
 
@@ -34,7 +33,7 @@ Imagine a website with a feature to transfer points or money:
 
 ### Race Condition Scenario
 
-A user has **100 points**. On the "Transfer Points" page, a typical request looks like this:
+- A user has **100 points**. On the "Transfer Points" page, a typical request looks like this:
 
 ```http
 POST /transfer HTTP/1.1
