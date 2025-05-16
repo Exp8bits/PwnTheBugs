@@ -27,7 +27,11 @@ wpscan --url https://target.com -e ap
 - `-e ap`: enumerate all plugins.
 
 **Manually**
-  - Visit `https://target.com/feed` or `https://target.com/?feed=rss2`
+  - Check these URLs:
+     - `https://target.com/feed`
+     - `https://target.com/?feed=rss2`
+     - `https://target.com/readme.html`
+     - `https://target.com/license.txt`
   - Check inside the source code of the page: readme.html or license.txt to get wp version or extract it using curl and grep commands.
   ```bash
   curl https://target.com/ | grep 'content="WordPress'
@@ -97,7 +101,7 @@ wpscan --url https://target.com -e u
 	"roles":["administrator"]
 	}
   ```
-- Navigate to /wp-login.php/ and login.
+- Navigate to `/wp-login.php/` and login.
 
 ---
 
@@ -140,13 +144,6 @@ wpxploit -u https://target.com
 (*) It depends on the same fingerprint used by WPScan.
 
 ---
-
-### Manual Recon
-
-#### Check `readme.html`, `license.txt`
-- Paths:
-  - `https://target.com/readme.html` ➝ shows WP version
-  - `https://target.com/license.txt`
 
 #### Check `.git`, Backup Files
 ```bash
