@@ -1,18 +1,17 @@
 ### Race Condition
 
 #### What is a Race Condition?
-A **Race Condition** occurs when two or more operations (processes or threads) run simultaneously and compete to access the same resource (such as a file, variable, or database). If these operations are not properly synchronized, it can lead to unexpected or incorrect behavior.
+- A **Race Condition** occurs when two or more operations (processes or threads) run simultaneously and compete to access the same resource (such as a file, variable, or database). If these operations are not properly synchronized, it can lead to unexpected or incorrect behavior.
 
 ##### Simple example:
-Imagine you and your brother are both logged into the same bank account from different phones:
-
-- You try to withdraw $100.
-- Your brother also tries to withdraw $100 at the exact same time.
-- The account only has $150.
+- Imagine you and your brother are both logged into the same bank account from different phones:
+  - You try to withdraw $100.
+  - Your brother also tries to withdraw $100 at the exact same time.
+  - The account only has $150.
 
 **What should happen** is: when one withdrawal begins, the system should block the other until it finishes.
 
-**But if there's no proper synchronization**, this may happen:
+- **But if there's no proper synchronization**, this may happen:
 
 1. Both apps read the balance: $150.
 2. Both say "Great! I can withdraw."
