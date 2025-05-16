@@ -8,15 +8,13 @@
   - You try to withdraw $100.
   - Your brother also tries to withdraw $100 at the exact same time.
   - The account only has $150.
-
-**What should happen** is: when one withdrawal begins, the system should block the other until it finishes.
+  - **What should happen** is: when one withdrawal begins, the system should block the other until it finishes.
 
 - **But if there's no proper synchronization**, this may happen:
-
-1. Both apps read the balance: $150.
-2. Both say "Great! I can withdraw."
-3. Both withdraw at the same time.
-4. The final balance becomes **-50$**.
+    1. Both apps read the balance: $150.
+    2. Both say "Great! I can withdraw."
+    3. Both withdraw at the same time.
+    4. The final balance becomes **-50$**.
 
 ✔ That’s a Race Condition.
 
