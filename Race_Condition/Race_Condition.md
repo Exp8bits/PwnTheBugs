@@ -58,7 +58,7 @@ amount=50&to_user=ahmed
   - All requests get processed!
 **Result**: You end up transferring 500 points instead of just 50 — even though you only had 100.
 
-### Alternative Using Burp Repeater
+### Alternative using Burp Repeater
 
 - Open 5 Repeater tabs for the same request.
 - Group them and run them in **parallel**.
@@ -66,7 +66,7 @@ amount=50&to_user=ahmed
 
 ---
 
-### Using burp Turbo Intruder
+### Alternative using burp Turbo Intruder
 
 - Send the request to **Turbo Intruder**.
 - Choose the `race-single-packet-attack.py` script.
