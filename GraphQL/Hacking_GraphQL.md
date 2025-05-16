@@ -55,8 +55,8 @@ mutation {
 }
 ```
 
-In Burp:
-- Set the Content-Type header to: `application/json`
+In burp:
+- Set the **Content-Type** header to: `application/json`
 - Use this payload:
 ```json
 {"query": "mutation { createUser(input: { name: \"Ahmed\", email: \"ahmed@example.com\", password: \"123456\" }) { id name email } }"}
@@ -66,9 +66,9 @@ Then check the response: If the server returns the requested data (like id, name
 
 ---
 
-# GraphQL Exploitation Scenarios
+# GraphQL Exploitation scenarios
 
-## Important Notes:
+## Important notes:
 - If you want to include quotation marks inside a string, you need to use `\"` instead of `"` to avoid conflicts.
 - To add special characters like `"` or `\n`, use the backslash `\`.
 - If the string inside the query contains quotation marks, escape them with `\`.
