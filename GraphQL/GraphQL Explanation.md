@@ -1,5 +1,5 @@
 
-# What Is GraphQL?
+# What is GraphQL?
 
 GraphQL is a query language for APIs and a runtime for executing those queries. It's considered a modern alternative to REST APIs.
 
@@ -18,7 +18,7 @@ GraphQL is a query language for APIs and a runtime for executing those queries. 
 Works with multiple endpoints, like:  
 GET /users | GET /users/1/posts
 
-**Simple Example:**  
+**Simple example:**  
 Request:
 ```
 GET /user/1
@@ -39,7 +39,7 @@ Response:
 Works through a single endpoint (usually `/graphql` or `/api/graphql`).  
 You define exactly what data you want in your query.
 
-**Simple Example:**  
+**Simple example:**  
 Request:
 ```graphql
 {
@@ -66,15 +66,15 @@ Response:
 
 ---
 
-## Comparison Table
+## Comparison table
 
-| Feature                     | REST API                                | GraphQL                                 |
-|----------------------------|------------------------------------------|------------------------------------------|
+| Feature                     | REST API                                 | GraphQL                                  |
+|---------------------------- |------------------------------------------|------------------------------------------|
 | Number of endpoints         | Many endpoints (e.g. /users, /posts)     | One endpoint (usually /graphql)          |
 | Request method              | Uses GET, POST, PUT, DELETE              | Mostly uses POST                         |
 | Data fetching               | Returns fixed data                       | You choose exactly what you need         |
 | Too much / too little data  | Sometimes gives extra or missing data    | Only gives what you ask for              |
-| Versioning                 | Uses versions like /v1, /v2              | No need for versioning                   |
+| Versioning                  | Uses versions like /v1, /v2              | No need for versioning                   |
 | Multiple data in one call   | Needs multiple requests                  | One request can get everything           |
 | Documentation               | Not always clear                         | Built-in and easy to explore             |
 | Response size               | Might be large                           | Smaller, based on your query             |
@@ -83,9 +83,9 @@ Response:
 
 ---
 
-## GraphQL Query Examples
+## GraphQL query examples
 
-### Get All Users' Info:
+### Get all users' info:
 ```graphql
 {
   users {
@@ -97,7 +97,7 @@ Response:
 ```
 - This query asks the server to return a list of all users with just their id, name, and email.
 
-### Get Info About a Specific User:
+### Get info about a specific user:
 ```graphql
 {
   user(username: "admin") {
