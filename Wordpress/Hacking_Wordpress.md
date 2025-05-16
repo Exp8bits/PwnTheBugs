@@ -25,6 +25,7 @@
 wpscan --url https://target.com -e ap
 ```
 - `-e ap`: enumerate all plugins.
+
 **Manually**
   - Visit `https://target.com/feed` or `https://target.com/?feed=rss2`
   - Check inside the source code of the page: readme.html or license.txt to get wp version or extract it using curl and grep commands.
@@ -40,6 +41,7 @@ wpscan --url https://target.com -e ap
 wpscan --url https://target.com -e vp
 ```
 - `-e vp`: vulnerable plugins.
+
 **Manually**
   - Check these URLs to find plugin version:
     - `https://target.com/wp-content/plugins/PLUGINNAME/readme.txt` 
@@ -55,6 +57,7 @@ wpscan --url https://target.com -e vp
 wpscan --url https://target.com -e vt
 ```
 - `-e vt`: vulnerable themes.
+
 **Manually**
   - Check there URLs to find theme version:
     - `https://target.com/wp-content/themes/THEMENAME/style.css`
