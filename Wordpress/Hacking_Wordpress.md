@@ -197,7 +197,7 @@ log=USERNAME&pwd=PASSWORD&wp-submit=Log+In&redirect_to=http://target.com/wp-admi
 
 ---
 
-### Uploading a picture (After getting username & password)
+### ☐ Uploading a picture (After getting username & password)
 
 - Using correct credentials, you can upload a file.
 - Path to file will appear in the response.
