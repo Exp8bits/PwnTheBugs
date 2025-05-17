@@ -6,7 +6,7 @@
 
 ---
 
-## No rate limit over password  
+## No rate-limit over password  
 - Meaning: You can try an unlimited number of passwords without the server blocking or limiting your attempts (Brute-force attack).  
 - Practical example: Try logging in with the same username but multiple different passwords (e.g., admin + 100 password attempts). If the site doesn't block or slow you down, it's vulnerable.  
 - Fix: The app should implement rate limiting or temporary blocking after a number of failed attempts.
@@ -33,11 +33,11 @@
 
 ---
 
-## Sql injection in username  
+## SQL Injection in username  
 - Meaning: Try injecting SQL code in the username field.  
 - Example:  
   - Username: `admin' OR 1=1; -- -`  
-  - Password: anything  
+  - Password: `anything`
 - If it lets you log in without correct credentials, it's vulnerable to SQL injection.
 
 ---
@@ -85,7 +85,10 @@
 
 ## From login (JSON format) to LFI  
 - Example:  
-  - `{"username":"\`cat /etc/passwd\`", "password":"test"}`  
-  - `{"username":"\`touch /var/www/html/hacked.html\`", "password":"test"}`  
-
+  ```
+    {"username":"\`cat /etc/passwd\`", "password":"test"}
+  ```
+  ```
+   `{"username":"\`touch /var/www/html/hacked.html\`", "password":"test"}`  
+  ```
 ---
