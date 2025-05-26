@@ -23,8 +23,8 @@
 
 ## 4. Host header injection in reset link
 - **Issue:** Reset links are generated based on the Host header.
-- **Risk:** Attackers can modify Host header to generate malicious reset URLs pointing to attacker-controlled domains.
-- **Test:** Modify Host header in requests and check if reset links in emails reflect the modified domain.
+- **Risk:** Attackers can modify `Host header` or `X-Forwarded-For` or `X-Forwarded-Host` to generate malicious reset URLs pointing to attacker-controlled domains.
+- **Test:** Modify `Host header` or `X-Forwarded-For` header or `X-Forwarded-Host` header in requests and check if reset links in emails reflect the modified domain.
 
 ---
 
@@ -179,6 +179,14 @@
 - **Risk:** Phishing or redirecting victims to malicious sites.
 - **Test:** Analyze the request of reset password and search for callback parameter.
 > `callback=https://example.com` ➜ `callback=https://evil.com` or `https:\\evil.com`
+
+---
+
+## 24. Open Redirect in password reset
+- **Issue:** The application allows a user to specify a `redirect` or `next` parameter in the password reset URL. This parameter is not properly validated, which allows an attacker to redirect users to a malicious website.
+- **Risk:** An attacker can craft a link like `https://target.com/reset?redirect=https://attacker.com`. If a user clicks it, they will be redirected to the attacker's site after completing the password reset process. This can be used for phishing attacks or to capture sensitive information.
+- **Test:** Change the `redirect` parameter to a site you control.
+> **From**  `https://target.com/reset?redirect=https://target.com/dashboard` **to**  `https://target.com/reset?redirect=https://attacker.com`
 
 ---
 
