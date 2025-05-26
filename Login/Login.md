@@ -92,3 +92,99 @@
    `{"username":"\`touch /var/www/html/hacked.html\`", "password":"test"}`  
   ```
 ---
+
+## Check for logic flaws in login flow
+- **What to check:**  
+  Some apps have logic mistakes in the login process. Try to bypass authentication by skipping steps or messing with requests.  
+- **Examples:**  
+  - Access `/dashboard` or `/admin` directly before logging in.  
+  - Use Burp Suite to change the server's response after a failed login (like changing `"success": false` to `"success": true"`).  
+- **Why:**  
+  If the backend doesn’t properly validate, you might get in without valid credentials.
+
+---
+
+## Manipulate JWT tokens
+- **What to check:**  
+  JWT (JSON Web Tokens) are used to store session info. Test if you can change them and still be accepted.  
+- **Examples:**  
+  - Change the `alg` from `HS256` to `none`.  
+  - Modify claims like `"admin": false` to `"admin": true`.  
+  - Use tools like `jwt-cracker` or `hashcat` to crack weak signatures.  
+- **Tools:**  
+  `jwt-tool`, `jwt-cracker`, Burp’s JWT editor.  
+- **Why:**  
+  If the app doesn't verify tokens properly, you can become an admin or access data you shouldn't.
+
+---
+
+## Check for session fixation
+- **What to check:**  
+  See if you can set a session ID before logging in, and if the server keeps using it after login.  
+- **Practical step:**  
+  - Visit the login page.  
+  - Set your own cookie (e.g., `PHPSESSID=1234`).  
+  - Log in.  
+  - If the session ID is still the same, it’s vulnerable.  
+- **Why:**  
+  Attackers can hijack sessions by setting the session ID for a victim.
+> Send the victim a link with a specific session ID (e.g., in an email or SMS).
+> When the victim logs in, the server continues to use that same session ID.
+> The attacker can then use the same session ID to access the victim's account.
+
+---
+
+## Bruteforce token-based login (PIN, OTP, etc.)
+- **What to check:**  
+  Apps that use short PINs (like 4-6 digits) can be cracked if there's no rate limiting.  
+- **How:**  
+  - Use Burp Intruder or `ffuf` to try all possible PINs (`0000-9999`).  
+  - If there's no slowdown or blocking, it’s vulnerable.  
+- **Why:**  
+  Attackers can guess the code and log in as another user.
+
+---
+
+## Check for caching of sensitive pages
+- **What to check:**  
+  Login pages and user dashboards shouldn’t be cached in the browser or by proxies.  
+- **Practical step:**  
+  - Look at response headers like:  
+    - `Cache-Control: no-store`  
+    - `Pragma: no-cache`  
+  - If these headers are missing, sensitive data might be stored and accessible to others.  
+- **Why:**  
+  On shared computers, cached pages can leak sensitive info.
+
+---
+
+## Username enumeration
+- **What to check:**  
+  Some apps reveal if a username or email exists based on error messages.  
+- **How:**  
+  - Log in with an invalid username and see what error you get.  
+  - Log in with a real username and wrong password, then compare messages.  
+- **Why:**  
+  If the messages are different, attackers can confirm valid usernames.
+
+---
+
+## Subdomain or endpoint-based auth bypass
+- **What to check:**  
+  Some apps have different login paths or subdomains that might not be secured the same way.  
+- **How:**  
+  - Send login requests to `/api/v2/auth` or other endpoints instead of the main login page.  
+  - Look for old endpoints that still work.  
+- **Why:**  
+  If these endpoints don’t check auth properly, you can log in without real credentials.
+
+---
+
+## Forceful browsing + IDOR after login
+- **What to check:**  
+  After logging in, try to access data from other users by changing IDs in URLs or parameters.  
+- **Examples:**  
+  - Visit `/user/profile?id=1337` to see another profile.  
+  - Open files like `/invoice/17.pdf`.  
+- **Why:**  
+  If you can see or download things you shouldn't, the app is vulnerable to IDOR (Insecure Direct Object References).
