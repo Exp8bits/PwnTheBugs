@@ -55,8 +55,13 @@ If a web page is vulnerable, it will show a red box. You can then create a **Pro
 </html>
 ```
 
-##  When is it a vulnerability?
+##  When is the vulnerability exploitable and reportable?
 - If the **iframe** successfully loads data from the target site, then the site is **vulnerable**.
 - If the site displays **sensitive data** (such as account details, personal data, admin panels, etc.) and lacks **X-Frame-Options**, it should be reported immediately.
+- Page to edit email or password
+- Page to change address or account data
+- Page to manage payment methods (like adding/deleting credit cards)
+- Page to escalate user privileges
+- Any action that can affect the security or privacy of the account
 
 >  **Note:** If the site allows framing but doesn’t display sensitive data, the issue might only be rated as **Informative**.
