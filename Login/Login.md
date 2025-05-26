@@ -129,7 +129,9 @@
 - **Why:**  
   Attackers can hijack sessions by setting the session ID for a victim.
 > Send the victim a link with a specific session ID (e.g., in an email or SMS).
+
 > When the victim logs in, the server continues to use that same session ID.
+
 > The attacker can then use the same session ID to access the victim's account.
 
 ---
