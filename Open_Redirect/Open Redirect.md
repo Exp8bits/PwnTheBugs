@@ -104,7 +104,7 @@ If the website redirects the user directly to the value of the `url` parameter w
 26. `https://evil.c℀.example.com`  
     - Unicode character to split trusted domain visually.
 
-27. `http://a.com／X.b.com`  
+27. `http://example.com／phishing.com`  
     - Fullwidth slash to trick parsers.
 
 28. `https://example.com?url=javascript://%250Aalert(1)`  
