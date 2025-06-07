@@ -6,6 +6,8 @@
 **Impact**: Credential theft.  
 **Mitigation**: Enforce HTTPS and implement HSTS.
 
+---
+
 ## 2. No confirmation code leads to account creation with admin email  
 **Vulnerability**: If the website doesn't validate the email, you can register with someone else's email or even the admin's.  
 **Attack Scenario**:  
@@ -13,6 +15,8 @@
 ◇ If there’s no confirmation, you now control the account associated with the admin’s email.  
 **Impact**: Privilege escalation.  
 **Mitigation**: Enforce email confirmation before allowing login or sensitive actions.
+
+---
 
 ## 3. Reusable confirmation link  
 **Vulnerability**: The confirmation link is reusable.  
@@ -22,6 +26,8 @@
 ◇ If reused, it grants access or creates a new session.  
 **Impact**: Unauthorized access.  
 **Mitigation**: Make confirmation links single-use and expire them after first use.
+
+---
 
 ## 4. OTP abuse without rate-limiting  
 **Vulnerability**: No rate limit on OTP requests allows abuse.  
@@ -38,6 +44,8 @@ for i in range(50):
 **Impact**: DoS or unauthorized access.  
 **Mitigation**: Apply rate limiting and CAPTCHA.
 
+---
+
 ## 5. OTP leaked in response  
 **Vulnerability**: OTP is included in the server response.  
 **Attack Scenario**:  
@@ -45,6 +53,8 @@ for i in range(50):
 ◇ Response contains `{ "otp": "123456" }`.  
 **Impact**: Easy OTP theft.  
 **Mitigation**: Never expose OTPs in responses; send them via secure channels.
+
+---
 
 ## 6. Pre-account Takeover with 2FA  
 **Vulnerability**: Attacker enables 2FA before verifying email.  
@@ -55,6 +65,8 @@ for i in range(50):
 **Impact**: Account lockout.  
 **Mitigation**: Block all settings access until email is verified.
 
+---
+
 ## 7. Pre-account Takeover via social login  
 **Vulnerability**: Attacker links social login to an unverified email.  
 **Attack Scenario**:  
@@ -63,6 +75,8 @@ for i in range(50):
 ◇ Victim later tries to log in via Google and loses control.  
 **Impact**: Unauthorized account linking.  
 **Mitigation**: Restrict OAuth linking until email is verified.
+
+---
 
 ## 8. OAuth Auto-verification exploit  
 **Vulnerability**: Signing in via OAuth verifies an unverified account.  
@@ -73,6 +87,8 @@ for i in range(50):
 **Impact**: Account takeover.  
 **Mitigation**: Treat OAuth logins as separate flows; avoid merging with unverified accounts.
 
+---
+
 ## 9. Email change bypasses verification  
 **Vulnerability**: Change email before verifying original email.  
 **Attack Scenario**:  
@@ -82,12 +98,16 @@ for i in range(50):
 **Impact**: Email hijack  
 **Mitigation**: Restrict email change until original email is verified.
 
+---
+
 ## 10. Account deletion without password confirmation  
 **Vulnerability**: Delete account without password confirmation.  
 **Attack Scenario**:  
 ◇ After hijacking, attacker deletes account easily.  
 **Impact**: Permanent denial of access.  
 **Mitigation**: Require re-authentication for critical actions.
+
+---
 
 ## 11. HTML Injection in username field  
 **Vulnerability**: HTML injection leads to UI deception.  
@@ -104,6 +124,8 @@ for i in range(50):
 **Impact**: Phishing, fake UI, or visual manipulation.  
 **Mitigation**: Sanitize user input and use output encoding.
 
+---
+
 ## 12. SQL Injection in username or email  
 **Vulnerability**: SQL injection through input fields.  
 **Attack Scenario**:  
@@ -111,12 +133,16 @@ for i in range(50):
 **Impact**: Bypass login, data access.  
 **Mitigation**: Use prepared statements and ORM.
 
+---
+
 ## 13. Open Redirect after registration  
 **Vulnerability**: Unvalidated redirect URL parameter.  
 **Attack Scenario**:  
 ◇ `http://example.com/redirect?url=http://attacker.com`  
 **Impact**: Phishing or malware redirection.  
 **Mitigation**: Whitelist redirect destinations.
+
+---
 
 ## 14. Missing rate-limiting for registration  
 **Vulnerability**: Allows mass account creation.  
@@ -140,6 +166,8 @@ for i in range(100):
 
 **Impact**: Spam, abuse, account farm.  
 **Mitigation**: Apply CAPTCHA, email verification, and IP rate limiting.
+
+---
 
 ## 15. Email enumeration on sign up  
 **Vulnerability**: Site reveals if email exists during registration.  
