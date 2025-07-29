@@ -1,0 +1,11 @@
+▪ https://hackerone.com/reports/834366
+▪ https://hackerone.com/reports/204703
+▪ https://hackerone.com/reports/339352
+▪ https://hackerone.com/reports/49974
+▪ https://hackerone.com/reports/2106662
+▪ https://hackerone.com/reports/127703
+▪ https://hackerone.com/reports/6910
+▪ https://hackerone.com/reports/177508 => csrf to xss
+▪ https://hackerone.com/reports/1124540
+▪ https://hackerone.com/reports/1121990
+▪ https://github.com/reddelexc/hackerone-reports/blob/master/tops_by_bug_type/TOPCSRF.md => there are about 500 reports about csrf
