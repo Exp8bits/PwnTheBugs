@@ -42,7 +42,7 @@ Referrer: https://evil.com/file@https://example.com
 - Alternate characters: `|`, `/`, `?`, `#`
   - Example:
   	- `Referrer: https://evil.com/file     # Error.`
-    	- `Referrer: https://evil.com/file?//victim.com     # Success.`
+   - `Referrer: https://evil.com/file?//victim.com     # Success.`
 
 #### HTML PoC with Referrer:
 ```html
