@@ -6,11 +6,11 @@
 
 ▪ Identifying Weaknesses in Input Handling:
 • Look for the direct usage of these inputs in dangerous functions, such as:
-  - eval(), setTimeout(), or setInterval() when passing string values.
-  - innerHTML or outerHTML, which may directly render content.
-  - document.write() or document.writeln().
-  - addEventListener() or any function that executes JavaScript code based on user inputs.
-  - As soon as you find the first link followed by a secondary link, the parameter is usually named returnurl, url, or returnpath. Inject the code javascript:confirm() into it, or look for bypass techniques.
+  - `eval()`, `setTimeout()`, or `setInterval()` when passing string values.
+  - `innerHTML` or `outerHTML`, which may directly render content.
+  - `document.write()` or `document.writeln()`.
+  - `addEventListener()` or any function that executes JavaScript code based on user inputs.
+  - As soon as you find the first link followed by a secondary link, the parameter is usually named `returnurl`, `url`, or `returnpath`. Inject the code javascript:confirm() into it, or look for bypass techniques.
   - Example: `?returnUrl=javascript:alert(document.domain)`
 
 - If the application displays content based on `document.location.hash`:
