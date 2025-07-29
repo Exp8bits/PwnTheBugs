@@ -69,4 +69,3 @@
 - Cookies: Accessed using document.cookie.
 - Current URL: Obtained using window.location.href.
 - The entire page content is replaced with a large heading (H1) containing the text "XSS Test Successful!" in red color.
-- 
