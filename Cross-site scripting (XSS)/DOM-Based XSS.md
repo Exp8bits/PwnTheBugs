@@ -5,6 +5,7 @@
 `add()` | `after()` | `append()` | `animate()` | `insertAfter()` | `insertBefore()` | `before()` | `html()` | `prepend()` | `replaceWith()` | `wrap()` | `wrapInner()` | `wrapAll()` | `has()` | `constructor()` | `init()` | `index()` | `jQuery.parseHTML()` | `$.parseHTML()`
 
 ▪ Identifying Weaknesses in Input Handling:
+
 • Look for the direct usage of these inputs in dangerous functions, such as:
   - `eval()`, `setTimeout()`, or `setInterval()` when passing string values.
   - `innerHTML` or `outerHTML`, which may directly render content.
