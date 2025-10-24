@@ -10,7 +10,7 @@
 - Bypass techniques:
   - Change `shell.php` to `shell.php.jpg`
   - Content-Type spoofing: `curl -F "file=@shell.php;type=image/jpeg"`
-  > Change "file" if needed
+    > Change "file" if needed
   - NULL BYTE and Weird suffixes: `shell.php;.jpg`, `shell.php%20`, `shell.php%00.jpg`
 - curl example:
   ```bash
