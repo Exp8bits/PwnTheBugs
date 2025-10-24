@@ -13,4 +13,5 @@
 - Bypass:
   - Change `exploit.svg` to `exploit.svg.png` or `exploit.svg.jpg`
   - Modify `Content-Type` to `image/svg+xml` or `text/xml`
+  - Send as `.txt` or `.html` with SVG content
   - URL-encode `exploit%2Esvg` or just add **spaces/newlines**
