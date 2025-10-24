@@ -10,7 +10,7 @@
   <image href="http://YOUR-COLLAB.DOMAIN/track?test=svg"/>
 </svg>
 ```
-- - Check: Content-Type returned, CSP, X-Content-Type-Options.
+- Check: Content-Type returned, CSP, X-Content-Type-Options.
 - Bypass:
   - Change `exploit.svg` to `exploit.svg.png` or `exploit.svg.jpg`
   - Modify `Content-Type` to `image/svg+xml` or `text/xml`
