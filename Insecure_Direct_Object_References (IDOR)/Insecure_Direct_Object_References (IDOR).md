@@ -223,7 +223,7 @@ Cookie: user_data=eyJ1c2VyX2lkIjoxMjN9
 ---
 
 ### Using FFUF
-```text
+```bash
 # Basic IDOR fuzzing with ffuf
 ffuf -u https://target.com/api/user/FUZZ -w numbers.txt -mc 200
 
