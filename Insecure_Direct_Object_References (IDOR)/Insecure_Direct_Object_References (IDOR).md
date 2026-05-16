@@ -289,7 +289,7 @@ POST /api/update
 ---
 
 ### Account Takeover
-- Using IDOR to takeover accounts (Attack id: 123):
+- Using IDOR to takeover accounts (Attacker id: 123):
   ```bash
   # Password reset via IDOR
   POST /api/reset-password
