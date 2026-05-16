@@ -7,6 +7,8 @@ jump, code, reg, do, func, arg, option, load, process, step,
 read, function, req, feature, exe, module
 ```
 
+---
+
 ## Linux Commands
 ```bash
 ; cat /etc/passwd          # User account information
@@ -26,6 +28,8 @@ less /etc/passwd
 more /etc/passwd
 ```
 
+---
+
 ## Windows Commands
 ```cmd
 & dir C:\                                           # Lists root directory
@@ -34,6 +38,8 @@ more /etc/passwd
 & ver                                               # Shows Windows version
 & systeminfo                                        # Detailed system information
 ```
+
+---
 
 ## Semicolon (;) - Command Sequencing
 ```bash
