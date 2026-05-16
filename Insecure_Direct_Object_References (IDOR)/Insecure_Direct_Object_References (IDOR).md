@@ -248,6 +248,25 @@ ffuf -u https://target.com/api/user \
 
 ---
 
+### Hash-Based ID Bypass
+```bash
+# MD5 hashed IDs
+# If ID is MD5(user_id), you can generate your own
+echo -n "123" | md5sum  # 202cb962ac59075b964b07152d234b70
+# Test: /api/user/202cb962ac59075b964b07152d234b70
+
+# Base64 encoded IDs
+echo "123" | base64     # MTIzCg==
+echo "124" | base64     # MTI0Cg==
+# Test: /api/user/MTI0Cg==
+
+# URL-safe Base64
+echo -n "user:123" | base64  # dXNlcjoxMjM=
+echo -n "user:124" | base64  # dXNlcjoxMjQ=
+```
+
+---
+
 ## Prevention and Mitigation
 
 1. **Continuous user permission validation**  
