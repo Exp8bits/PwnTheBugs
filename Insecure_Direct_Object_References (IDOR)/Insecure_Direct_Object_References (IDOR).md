@@ -267,6 +267,27 @@ echo -n "user:124" | base64  # dXNlcjoxMjQ=
 
 ---
 
+### Parameter Pollution
+```bash
+# Standard request
+GET /api/profile?user_id=123
+
+# Parameter pollution attempts
+GET /api/profile?user_id=123&user_id=124
+GET /api/profile?user_id=124&user_id=123
+GET /api/profile?user_id[]=123&user_id[]=124
+
+# JSON parameter pollution
+POST /api/update
+{
+  "user_id": 123,
+  "user_id": 124,
+  "email": "attacker@evil.com"
+}
+```
+
+---
+
 ## Prevention and Mitigation
 
 1. **Continuous user permission validation**  
