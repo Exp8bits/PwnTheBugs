@@ -232,7 +232,7 @@ Path Traversal Bypass
   # Null byte injection (older systems)
   GET /api/user/123%00/../../user/124
   ```
-Using IDOR to takeover accounts (Attack id: 123):
+Using IDOR to takeover accounts (Attacker id: 123):
   ```bash
   # Password reset via IDOR
   POST /api/reset-password
