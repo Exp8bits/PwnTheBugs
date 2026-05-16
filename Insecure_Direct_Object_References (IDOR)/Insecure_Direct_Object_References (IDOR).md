@@ -169,6 +169,9 @@ IDOR (Insecure Direct Object References) is a type of access control vulnerabili
 
 ### IDOR in file access
 - URL: `https://example.com/download?file=report123.pdf`
+  - Change to: `https://example.com/download?file=report124.pdf` 
+- URL: `https://site.com/images/user/123/avatar.jpg`
+  - Change to: `https://site.com/images/user/124/avatar.jpg`
 - Modifying the file name may lead to unauthorized file access.
 
 ---
