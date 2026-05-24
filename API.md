@@ -1,8 +1,8 @@
 - Gathering API Endpoints
   ```bash
-  katana -mdc 'contains(endpoint,"api")' -js -u https://example.com
-  katana -list targets.txt -mdc 'contains(endpoint,"api")' -js
-  katana -list targets.txt -mdc 'contains(endpoint,"api")' -js -silent -o apis.txt    # -f qurl for cleaning noise 'if exsit'
+  katana -mdc 'contains(endpoint,"api")' -jc -u https://example.com
+  katana -list targets.txt -mdc 'contains(endpoint,"api")' -jc
+  katana -list targets.txt -mdc 'contains(endpoint,"api")' -jc -silent -o apis.txt    # -f qurl for cleaning noise 'if exsit'
   ```
 - Read the `docs` files carefully to understand how the application communicates with its APIs, what endpoints exist, how authentication works, and which headers or parameters are required.
 - Then start testing the endpoints manually. For example, if you find something like:
